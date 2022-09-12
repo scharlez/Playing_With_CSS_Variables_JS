@@ -5,7 +5,7 @@
   <title>Scoped CSS Variables and JS</title>
 </head>
 <body>
-  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+  <h2>Power of CSS Variables with <span class='hl'>JS</span></h2>
 
   <div class="controls">
     <label for="spacing">Spacing:</label>
@@ -18,14 +18,14 @@
     <input id="base" type="color" name="base" value="#ffc600">
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <img src="https://cdn.images.dailystar.co.uk/dynamic/169/photos/7000/936x622/965007.jpg">
 
   <style>
     /* Declaration that sets the default values for the variables */
     :root{
       --base: #ffc660;
-      --spacing: 10px; 
-      --blur: 10px
+      --spacing: 100px; 
+      --blur: 15px
     }
 
     /* Since variable have been defined above, we can now call upon them/use them using the same format previously established. To use a variable in CSS you have to say "var" and then call upon it as shown below. */
@@ -37,6 +37,7 @@
       background: var(--base);
       /* distorts the visability of photo and background cover */
       filter: blur(var(--blur));
+      size-adjust: 110%;
     }
     /* Color of the header will match whatever the root/variable is set to and will change if that color is changed */
     .h1 {
@@ -53,11 +54,12 @@
       color: white;
       font-family: 'helvetica neue', sans-serif;
       font-weight: 100;
-      font-size: 50px;
+      font-size: 20px;
     }
 
     .controls {
       margin-bottom: 50px;
+      font-size: 25px;
     }
 
     input {
@@ -66,6 +68,20 @@
   </style>
 
   <script>
+    // Selecting all of our inputs on the screen - calling them
+    const inputs = document.querySelectorAll('.controls input');
+    // Listening for change event for each individualize input 
+    function handleUpdate() {
+      //Dataset is an object that will contain all the data attributes from that specific element (in this situation its sizing)
+      //Variable is calling all the datasets with a suffix of "sizing" or nothing, shown as an empty string (to avoid getting undefine)
+      const suffix = this.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+      console.log(this.dataset)
+    }
+    // Triggers or listening for a change event/adjust is made with the inputs
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    //Triggers or listening for when mouse is moved/hovered over input settings
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
   </script>
 
 </body>

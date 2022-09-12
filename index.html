@@ -35,6 +35,12 @@
       padding: var(--spacing);
       /* the background is going to be set to the color attached to original variable declaration (color assigned on Line #26) */
       background: var(--base);
+      /* distorts the visability of photo and background cover */
+      filter: blur(var(--blur));
+    }
+    /* Color of the header will match whatever the root/variable is set to and will change if that color is changed */
+    .h1 {
+      color: var(--base);
     }
 
     /*
